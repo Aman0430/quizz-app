@@ -6,7 +6,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/ui/dropdown-menu";
 import { useEffect, useState } from "react";
 import data from "@/lib/categories.json";
 import { useQuiz } from "@/app/store";

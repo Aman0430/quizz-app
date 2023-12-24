@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/ui/skeleton";
 import { Player } from "@lottiefiles/react-lottie-player";
+import animationData from "@/lib/animation.json";
 
 type questionT = {
   answers: string[];
@@ -55,6 +56,15 @@ export default function Quiz() {
     getQuestions();
   }, [config.category, config.level, config.numberOfQuestion, config.type]);
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   const answerCheck = (ans: string) => {
     if (ans === questions[0].correct_answer) {
       setScore();
@@ -94,13 +104,14 @@ export default function Quiz() {
       {!questions?.length && !loading && (
         <div className="flex flex-col justify-center items-center">
           <Player
-            src="https://assets6.lottiefiles.com/packages/lf20_touohxv0.json"
+            src={animationData}
             className="player"
             loop
             autoplay
             style={{ height: "400px", width: "400px" }}
           />
-          <h1 className="mt-10 text-center font-extrabold text-transparent text-8xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+
+          <h1 className="mt-10 text-center font-bold text-transparent text-8xl bg-clip-text bg-gradient-to-r from-yellow-100 via-yellow-300 to-yellow-700 font-sans">
             YOUR SCORE :{" "}
             <span className="font-extrabold text-transparent text-10xl bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
               {config.score}
@@ -110,9 +121,9 @@ export default function Quiz() {
             onClick={() => {
               window.location.reload();
             }}
-            className="bg-slate-700 hover:bg-blue-400 my-10 text-white py-2 px-10 border border-gray-400 rounded shadow"
+            className="bg-yellow-100 hover:bg-yellow-400 my-10 text-black py-2 px-10 transition ease-in-out hover:scale-105 rounded shadow"
           >
-            Start Over
+            Start again
           </button>
         </div>
       )}
